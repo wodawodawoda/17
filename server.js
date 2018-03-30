@@ -1,10 +1,19 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('homepage get working');
-});
 app.use(express.static('assets'));
+
+app.get('/', (req, res) => {
+  res.sendFile('/index.html');
+});
+
+app.get('/userform', (req, res) => {
+  const response = {
+    first_name: req.query.first_name,
+    last_name: req.query.last_name
+  };
+  res.end(JSON.stringify(response));
+});
 
 const server = app.listen(3000, 'localhost', () => {
   const host = server.address().address;
@@ -12,3 +21,4 @@ const server = app.listen(3000, 'localhost', () => {
 
   console.log('Przykładowa aplikacja nasłuchuje na http://' + host + ':' + port);
 });
+
