@@ -24,6 +24,19 @@ app.get('/first-template', (req, res) => {
   });
 });
 
+app.get('/auth/google', (req, res) => {
+  res.render('auth-google', {
+    user: {
+      name: "",
+      permit: false
+    }
+  });
+});
+
+app.get('/inside', (req, res) => {
+  res.render('inside')
+})
+
 app.get('/store', (req, res) => {
   res.send('To jest sklep');
 });
@@ -36,7 +49,7 @@ app.get('/userform', (req, res) => {
   res.end(JSON.stringify(response));
 });
 
-const server = app.listen(3000, 'localhost', () => {
+const server = app.listen(3001, 'localhost', () => {
   const host = server.address().address;
   const port = server.address().port;
 
