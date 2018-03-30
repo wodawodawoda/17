@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+app.set('view engine', 'pug');
+app.set('views', './views');
 
 app.use(express.static('assets'));
 
@@ -12,6 +14,20 @@ app.get('/', (req, res) => {
   res.sendFile('/index.html');
 });
 
+app.get('/first-template', (req, res) => {
+  res.render('first-template', {
+    name: "Dynamic pug",
+    header: "Great pug",
+    showPug: true,
+    bark: "HAU",
+    url: "https://m.popkey.co/287d1c/kve1Z_s-200x150.gif?c=popkey-web&p=popkey&i=dogs-animals&l=search&f=.gif"
+  });
+});
+
+app.get('/store', (req, res) => {
+  res.send('To jest sklep');
+});
+
 app.get('/userform', (req, res) => {
   const response = {
     first_name: req.query.first_name,
@@ -20,13 +36,12 @@ app.get('/userform', (req, res) => {
   res.end(JSON.stringify(response));
 });
 
-app.get('/store', (req, res) => {
-  res.send('To jest sklep')
-})
-
 const server = app.listen(3000, 'localhost', () => {
   const host = server.address().address;
   const port = server.address().port;
 
   console.log('Przykładowa aplikacja nasłuchuje na http://' + host + ':' + port);
 });
+app.use((req, res, next) => {
+
+})
