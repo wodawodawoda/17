@@ -3,6 +3,11 @@ const app = express();
 
 app.use(express.static('assets'));
 
+app.use('/store', (req, res, next) => {
+  console.log('Pośrednik');
+  next();
+});
+
 app.get('/', (req, res) => {
   res.sendFile('/index.html');
 });
@@ -15,10 +20,13 @@ app.get('/userform', (req, res) => {
   res.end(JSON.stringify(response));
 });
 
+app.get('/store', (req, res) => {
+  res.send('To jest sklep')
+})
+
 const server = app.listen(3000, 'localhost', () => {
   const host = server.address().address;
   const port = server.address().port;
 
   console.log('Przykładowa aplikacja nasłuchuje na http://' + host + ':' + port);
 });
-
