@@ -1,0 +1,11 @@
+doctype html
+html
+    head
+        title= name
+    body
+        h1= header
+        p.greetings#people I'm rendered from pug! #{bark}
+        if(showPug)
+            img(src="/pug.gif" alt="dynamic pug")
+        else
+            img(src="/sadpug.gif" alt="sad pug")

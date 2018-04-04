@@ -5,7 +5,11 @@ var config = require('./config');
 var googleProfile = {};
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', './views');
 app.use(express.static('assets'));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // PASSPORT
 passport.serializeUser((user, done) => {
@@ -29,20 +33,15 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-app.set('view engine', 'pug');
-app.set('views', './views');
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 // APP ROUTES
-
 app.get('/', (req, res) => {
   res.render('auth-google', {user: req.user});
 });
 
 app.get('/logged', (req,res) => {
-  res.send('bangla')
+  res.render('first-template', {showPug: true})
 })
 
 
