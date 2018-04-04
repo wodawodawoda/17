@@ -30,3 +30,6 @@ const server = app.listen(3000, 'localhost', () => {
 
   console.log('Przykładowa aplikacja nasłuchuje na http://' + host + ':' + port);
 });
+app.use(function (req, res, next) {
+    res.status(404).send('Wybacz, nie mogliśmy odnaleźć tego, czego żądasz!')
+});
